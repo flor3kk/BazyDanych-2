@@ -1,0 +1,186 @@
+-- LABY 0 ZADANIA -----------------
+-- DECLARE
+--   moj_wiek NUMBER := 11;
+--   moje_imie VARCHAR2(25) := 'Bartłomiej';
+--   jestem_studentem BOOLEAN := true;
+
+-- BEGIN
+--   DBMS_OUTPUT.PUT_LINE('moj wiek to:' || moj_wiek);
+--   DBMS_OUTPUT.PUT_LINE('moje imie to:' || moje_imie);
+--   IF jestem_studentem THEN
+--   	DBMS_OUTPUT.PUT_LINE('jestem studentem');
+--   ELSE
+--   	DBMS_OUTPUT.PUT_LINE('nie jestem studentem');
+--   END IF;
+
+--   DBMS_OUTPUT.PUT_LINE(moje_imie || ' ma ' || moj_wiek || ' lat, '); 
+--   IF moj_wiek < 18 THEN
+--     DBMS_OUTPUT.PUT_LINE('jest nieletni');
+--   ELSIF moj_wiek >= 18 AND moj_wiek < 65 THEN
+--     DBMS_OUTPUT.PUT_LINE('jest osoba dorosła');
+--   ELSE
+--     DBMS_OUTPUT.PUT_LINE('jest emerytem');
+--   END IF;
+  
+--   IF jestem_studentem THEN
+--     DBMS_OUTPUT.PUT_LINE('jest studentem');
+--   ELSE
+--     DBMS_OUTPUT.PUT_LINE('nie jest studentem'); 
+--   END IF;
+-- END;
+
+-- LABY 1 ZADANIA----------------------
+
+-- ZADANIE 1 
+-- DECLARE 
+-- 	liczba NUMBER := 10;
+-- 	znak VARCHAR(5);
+-- BEGIN
+-- 	CASE liczba
+-- 		WHEN 1 THEN znak := 'I';
+-- 		WHEN 2 THEN znak := 'II';
+-- 		WHEN 3 THEN znak := 'III';
+-- 		WHEN 4 THEN znak := 'IV';
+-- 		WHEN 5 THEN znak := 'V';
+-- 		WHEN 6 THEN znak := 'VI';
+-- 		WHEN 7 THEN znak := 'VII';
+-- 		WHEN 8 THEN znak := 'VIII';
+-- 		WHEN 9 THEN znak := 'IX';
+-- 		WHEN 10 THEN znak := 'X';
+-- 	END CASE;
+
+-- 	DBMS_OUTPUT.PUT_LINE('rzymski odpowiedni liczby: ' || liczba || ' to: ' || znak);
+-- END;
+
+-- ZADANIE 2
+-- DECLARE 
+-- 	liczba NUMBER := 129;
+-- 	git VARCHAR(20);
+-- BEGIN
+-- 	CASE 
+--         WHEN liczba MOD 2 = 0 THEN 
+--             git := 'PARZYSTA';
+--         ELSE 
+--             git := 'NIEPARZYSTA';
+-- 	END CASE;
+-- 	DBMS_OUTPUT.PUT_LINE('liczba: ' || liczba || ' jest ' || git);
+-- END;
+
+-- ZADNAIE 3
+-- DECLARE 
+-- 	miesiac NUMBER := 11;
+-- 	dni NUMBER;
+-- BEGIN
+-- 	CASE miesiac
+-- 		WHEN 1 THEN dni := 31;
+-- 		WHEN 2 THEN dni := 29;
+-- 		WHEN 3 THEN dni := 31;
+-- 		WHEN 4 THEN dni := 30;
+-- 		WHEN 5 THEN dni := 31;
+-- 		WHEN 6 THEN dni := 30;
+-- 		WHEN 7 THEN dni := 31;
+-- 		WHEN 8 THEN dni := 31;
+-- 		WHEN 9 THEN dni := 30;
+-- 		WHEN 10 THEN dni := 31;
+-- 		WHEN 11 THEN dni := 30;
+-- 		WHEN 11 THEN dni := 31;
+-- 	END CASE;
+
+-- 	DBMS_OUTPUT.PUT_LINE('miesiac ' || miesiac || ' ma: ' || dni || ' dni');
+-- END;
+
+-- ZADANIE 4
+-- DECLARE 
+-- 	liczba NUMBER := 1;
+-- BEGIN
+-- 	WHILE liczba >= 1 LOOP
+--         DBMS_OUTPUT.PUT_LINE('liczba: ' || liczba);
+-- 		liczba := liczba - 1;
+-- 	END LOOP;
+-- END;
+
+-- ZADANIE 5
+-- DECLARE 
+-- 	liczba NUMBER := 123;
+-- 	iloczyn NUMBER := 1;
+-- BEGIN
+-- 	FOR i IN 1..liczba LOOP
+-- 		DBMS_OUTPUT.PUT_LINE('liczba: ' || i);
+
+--     	iloczyn := i * iloczyn;
+-- 		DBMS_OUTPUT.PUT_LINE('iloczyn: ' || iloczyn);
+
+--     	EXIT WHEN iloczyn > 12345;
+--     END LOOP;
+-- END;
+
+-- ZADANIE 6
+-- CREATE TABLE pracownicy ( 
+--     id_pracownika  NUMBER PRIMARY KEY, 
+--     imie           VARCHAR2(50), 
+--     nazwisko       VARCHAR2(50), 
+--     pensja         NUMBER 
+-- ); 
+ 
+-- Dodawanie danych 
+-- INSERT INTO pracownicy VALUES (1, 'Jan', 'Kowalski', 50000); 
+-- INSERT INTO pracownicy VALUES (2, 'Anna', 'Nowak', 60000); 
+-- INSERT INTO pracownicy VALUES (3, 'Piotr', 'Wiśniewski', 55000); 
+-- INSERT INTO pracownicy VALUES (4, 'Andrzej', 'Dragan', 12000); 
+-- INSERT INTO pracownicy VALUES (5, 'Julian', 'Cz', 10000); 
+
+-- -- Aktualizacja danych 
+-- UPDATE pracownicy SET pensja = 58000 WHERE id_pracownika = 1; 
+ 
+-- -- Zapytanie o dane 
+-- SELECT * FROM pracownicy; 
+ 
+-- -- Usuwanie danych 
+-- DELETE FROM pracownicy WHERE id_pracownika = 3; 
+ 
+-- -- Ponowne zapytanie o dane po usunięciu 
+-- SELECT * FROM pracownicy; 
+
+-- ZADANIE 6
+-- DECLARE 
+-- 	CURSOR kursor IS
+-- 		SELECT * FROM pracownicy;
+-- BEGIN 
+-- 	FOR pracownik in kursor LOOP
+-- 		DBMS_OUTPUT.PUT_LINE('ID: ' || pracownik.id_pracownika || ', Imię: ' || pracownik.imie || ', Nazwisko: ' || pracownik.nazwisko || ', Pensja: ' || pracownik.pensja); 
+-- 		UPDATE pracownicy set pensja = pensja * 1.1 where pensja < 60000;
+--     END LOOP; 
+-- END;
+
+-- ZADANIE 7
+-- DECLARE 
+--     ziom VARCHAR(20) := 'Kowalski';
+-- 	CURSOR kursor IS
+-- 		SELECT * FROM pracownicy where nazwisko = ziom;
+-- BEGIN 
+-- 	FOR pracownik in kursor LOOP
+-- 		DBMS_OUTPUT.PUT_LINE('ID: ' || pracownik.id_pracownika || ', Imię: ' || pracownik.imie || ', Nazwisko: ' || pracownik.nazwisko || ', Pensja: ' || pracownik.pensja); 
+--     END LOOP; 
+-- END;
+
+
+-- ZADANIE 8
+DECLARE 
+    liczba NUMBER := 0;
+	srednia NUMBER;
+	CURSOR kursor IS
+		SELECT * FROM pracownicy;
+
+BEGIN
+    select avg(pensja) INTO srednia from pracownicy;
+	FOR pracownik IN kursor LOOP
+		if pracownik.pensja >= srednia then
+        	liczba := liczba + 1;
+		end if;
+	END LOOP;
+	DBMS_OUTPUT.PUT_LINE('srednia: ' || srednia); 
+	DBMS_OUTPUT.PUT_LINE('liczna pracownikow ktorzy zarabiaja lepiejk niz srednia: ' || liczba); 
+END;
+
+
+
